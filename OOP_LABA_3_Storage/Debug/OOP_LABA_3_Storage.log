@@ -1,3 +1,3 @@
 ﻿  OOP_LABA_3_Storage.cpp
-C:\Users\ildar\source\repos\OOP_LABA_3_Storage\OOP_LABA_3_Storage\OOP_LABA_3_Storage.cpp(495,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\ildar\source\repos\OOP_LABA_3_Storage\OOP_LABA_3_Storage\OOP_LABA_3_Storage.cpp(550,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
   OOP_LABA_3_Storage.vcxproj -> C:\Users\ildar\source\repos\OOP_LABA_3_Storage\Debug\OOP_LABA_3_Storage.exe

@@ -369,12 +369,17 @@ void bot1(mystorage& storage)
 	list_add(storage, n);//добавляем новые объекты
 } 
 
-void bot2(mystorage& storage, int i, VW_group* chVW_group)
+void bot2(mystorage& storage, VW_group* chVW_group)
 {
 	if (chVW_group != NULL)
 	{
 		cls;
-		storage.delobj(i+1);//удаляем объекты выбранный
+		int n;
+		do {
+			cout << "Введите номер объекта:\n";
+			cin >> n;
+		} while (!cin);
+		storage.delobj(n);
 	}
 }
 
@@ -473,6 +478,57 @@ void bot4(mystorage& storage, VW_group*& chVW_group)
 	}
 }
 
+void bot5(mystorage& storage, VW_group*& chVW_group)
+{
+	char ch = NULL;
+
+	while (1)
+	{
+		if (ch == '0')
+			break;
+		cls;
+		cout << "1.Add Porsche\n2.Add Skoda\n3.Add Hyundai\n4.Add Genesis\n\n0.Назад";
+		ch = _getch();
+		int n = 0;
+		switch (ch)
+		{
+		case '1': {
+			cls;
+			cout << "Введите n: ";
+			cin >> n;
+			storage.addup(new Porsche(n), chVW_group);
+			break;
+		}
+		case '2': {
+			cls;
+			cout << "Введите n: ";
+			cin >> n;
+			storage.addup(new Skoda(n), chVW_group);
+			break;
+		}
+		case '3': {
+			cls;
+			cout << "Введите n: ";
+			cin >> n;
+			storage.addup(new Hyundai(n), chVW_group);
+			break;
+		}
+		case '4': {
+			cls;
+			cout << "Введите n: ";
+			cin >> n;
+			storage.addup(new Genesis(n), chVW_group);
+			break;
+		}
+		case '0': {
+			ch = '0';
+			break;
+		}
+		}
+	}
+}
+
+
 void menu_out()
 {
 	cout << endl;
@@ -508,7 +564,7 @@ int main()
 			break;
 		}
 		case '2': {
-			bot2(storage,i, chVW_group);
+			bot2(storage, chVW_group);
 			break;
 		}
 		case '3': {
@@ -522,7 +578,8 @@ int main()
 			break;
 		}
 		case '5': {
-			
+			if (chVW_group != NULL)
+				bot5(storage, chVW_group);
 			break;
 		}
 		case '6': {
