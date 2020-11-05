@@ -333,6 +333,43 @@ void list_out(mystorage& storage, int ch, VW_group*& chVW_group)
 
 }
 
+void list_add(mystorage& storage, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		int n = rand() % 200 + 150;
+		switch (1 + rand() % 4) {
+		case 1: {
+			storage.add(new Hyundai(n));
+			break;
+		}
+		case 2: {
+			storage.add(new Skoda(n));
+			break;
+		}
+		case 3: {
+			storage.add(new Porsche(n));
+			break;
+		}
+		case 4: {
+			storage.add(new Genesis(n));
+			break;
+		}
+		};
+	}
+}
+
+void bot1(mystorage& storage)
+{
+	cls;
+	int n;
+	do {
+		cout << "Введите количество элементов:\n";
+		cin >> n;
+	} while (!cin);
+	list_add(storage, n);
+} 
+
 void menu_out()
 {
 	cout << endl;
@@ -364,7 +401,7 @@ int main()
 		switch (n)
 		{
 		case '1': {
-			
+			bot1(storage);
 			break;
 		}
 		case '2': {
@@ -393,6 +430,16 @@ int main()
 		}
 		case '8': {
 			
+			break;
+		}
+		case 72: {
+			if (i != 0)
+				i--;
+			break;
+		}
+		case 80: {
+			if (i != storage.getN())
+				i++;
 			break;
 		}
 		}
