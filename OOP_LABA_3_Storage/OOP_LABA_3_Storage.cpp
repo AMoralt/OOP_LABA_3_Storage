@@ -370,6 +370,65 @@ void bot1(mystorage& storage)
 	list_add(storage, n);
 } 
 
+void bot2(mystorage& storage, VW_group* chVW_group)
+{
+	if (chVW_group != NULL)
+	{
+		cls;
+		int n;
+		do {
+			cout << "Введите номер объекта:\n";
+			cin >> n;
+		} while (!cin);
+		storage.delobj(n);
+	}
+}
+
+void bot3(mystorage& storage, int& i, VW_group*& chVW_group)
+{
+	char ch;
+	while (1)
+	{
+
+		cls;
+		if (chVW_group == NULL)
+			break;
+		cout << "Объект: ";
+		chVW_group->outname();
+		cout << "\n1.Develope car\n2.Изменить мощность\n3.Удалить\n\n0.Назад";
+		ch = _getch();
+		switch (ch)
+		{
+		case '1': {
+			cout << endl << endl;
+			storage.getobj(chVW_group)->develope_car();
+			Sleep(600);
+			break;
+		}
+		case '2': {
+			int n;
+			cout << "\nВведите мощность: ";
+			cin >> n;
+			storage.getobj(chVW_group)->set_power(n);
+			cout << "\nid = " << storage.getobj(chVW_group)->get_power();
+			break;
+		}
+		case '3': {
+			storage.delobj(chVW_group);
+			i--;
+			break;
+		}
+		case '0': {
+			ch = 0;
+			break;
+		}
+		}
+		if (ch == 0)
+			break;
+	}
+
+}
+
 void menu_out()
 {
 	cout << endl;
@@ -405,11 +464,12 @@ int main()
 			break;
 		}
 		case '2': {
-			
+			bot2(storage, chVW_group);
 			break;
 		}
 		case '3': {
-			
+			if (chVW_group != NULL)
+				bot3(storage, i, chVW_group);
 			break;
 		}
 		case '4': {
