@@ -43,9 +43,9 @@ public:
 
 class Hyundai :public VW_group {
 public:
-	Hyundai() : VW_group() {}
+	Hyundai() : VW_group() {}//наследование конструктора
 
-	Hyundai(int power) : VW_group (power) {}
+	Hyundai(int power) : VW_group (power) {}//наследование конструктора
 
 	void develope_car() {
 		cout << "Hyundai develope new car!!\n";
@@ -58,9 +58,9 @@ public:
 
 class Skoda : public VW_group {
 public:
-	Skoda() : VW_group() {}
+	Skoda() : VW_group() {}//наследование конструктора
 
-	Skoda(int power) : VW_group(power) {}
+	Skoda(int power) : VW_group(power) {}//наследование конструктора
 
 	void develope_car() {
 		cout << "Skoda develope new car!!\n";
@@ -73,9 +73,9 @@ public:
 
 class Porsche : public VW_group {
 public:
-	Porsche() : VW_group() {}
+	Porsche() : VW_group() {}//наследование конструктора
 
-	Porsche(int power) : VW_group(power) {}
+	Porsche(int power) : VW_group(power) {}//наследование конструктора
 
 	void develope_car() {
 		cout << "Porsche develope new car!!\n";
@@ -88,9 +88,9 @@ public:
 
 class Genesis : public Hyundai {
 public:
-	Genesis() : Hyundai() {}
+	Genesis() : Hyundai() {}//наследование конструктора
 
-	Genesis(int power) : Hyundai(power) {}
+	Genesis(int power) : Hyundai(power) {}//наследование конструктора
 
 	void develope_car() {
 		cout << "Genesis develope new car!!\n";
@@ -121,27 +121,27 @@ public:
 		else
 			this->end->setnext(obj);
 		this->end = obj;
-		this->N++;
+		this->N++;//добавляем число объектов
 	}
 
 	void addup(VW_group* obj, VW_group*& select) {
 
-		if (select != head)
+		if (select != head)//если это не головной узел
 		{
 			VW_group* back = head;
 			First();
-			while (EOL())
+			while (EOL())//пока не пусто
 			{
-				if (next == select)
+				if (next == select)//как только нашли выходим
 					break;
 				back = next;
 				this->Next();
 			}
-			back->setnext(obj);
+			back->setnext(obj);//присваиваем next=obj
 		}
 		else
 			head = obj;
-		obj->setnext(select);
+		obj->setnext(select);//присваиваю next=select
 		this->N++;
 	}
 
@@ -155,27 +155,27 @@ public:
 		this->N++;
 	}
 	void First() {
-		this->next = this->head;
+		this->next = this->head;//присваиваю next головному узлу
 	}
 
 	void Next() {
-		this->next = this->next->getnext();
+		this->next = this->next->getnext();//присваиваю next след.
 	}
 
-	int EOL() {
+	int EOL() {//проверка на пустоту
 		if (next == NULL)
 			return 0;
 		return 1;
 	}
-	VW_group* getobj() {
+	VW_group* getobj() {//возвращаю next
 		return this->next;
 	}
 
-	VW_group* getobj(VW_group* obj) {
-		for (First(); EOL(); Next())
+	VW_group* getobj(VW_group* obj) {//возвращаю next, если 
+		for (First(); EOL(); Next())//нашли next = obj
 			if (next == obj)
 				return next;
-		return NULL;
+		return NULL;//иначе выводим NULL
 	}
 
 	void move(VW_group*& obj, string vector) {
@@ -257,7 +257,7 @@ public:
 				selobj = next->getnext();
 			}
 			else
-				selobj = next;
+ 				selobj = next;
 			VW_group* back = next;
 			if (selobj == head || selobj == end)
 			{
@@ -280,24 +280,24 @@ public:
 		}
 	}
 
-	void delobj(VW_group*& selobj) {
+	void delobj(VW_group*& selobj) {//удаление объекта
 		First();
 		VW_group* back = head;
-		while (EOL())
+		while (EOL())//пока не конец
 		{
-			if (next == selobj)
+			if (next == selobj)//если находим selobj
 				break;
-			back = next;
+			back = next;//
 			this->Next();
 		}
-		if (selobj == head || selobj == end)
+		if (selobj == head || selobj == end)//передаем все свойства объекта перед удалением 
 		{
-			if (selobj == head)
+			if (selobj == head)//если это головной 
 			{
 				head = head->getnext();
 				back = head;
 			}
-			if (selobj == end)
+			if (selobj == end)//если это последний 
 			{
 				end = back;
 				if (end != NULL)
@@ -307,7 +307,7 @@ public:
 		else
 			back->setnext(selobj->getnext());
 
-		delete selobj;
+		delete selobj;//удаляем
 		this->N--;
 		selobj = NULL;
 	}
@@ -320,14 +320,14 @@ public:
 void list_out(mystorage& storage, int ch, VW_group*& chVW_group)
 {
 	int i = 0;
-	for (storage.First(); storage.EOL(); storage.Next())
+	for (storage.First(); storage.EOL(); storage.Next())//от начала списка до конца
 	{
 		if (ch == i)
 		{
 			cout << "\t->";
 			chVW_group = storage.getobj();
 		}
-		storage.getobj()->outname();
+		storage.getobj()->outname();//название объекта
 		i++;
 	}
 
@@ -335,12 +335,12 @@ void list_out(mystorage& storage, int ch, VW_group*& chVW_group)
 
 void list_add(mystorage& storage, int n)
 {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++)//добавляем рандомные объекты 
 	{
 		int n = rand() % 200 + 150;
-		switch (1 + rand() % 4) {
+		switch (1 + rand() % 4) {//взависимости от того что зарандомило
 		case 1: {
-			storage.add(new Hyundai(n));
+			storage.add(new Hyundai(n));//то и создаем и добавляем
 			break;
 		}
 		case 2: {
@@ -367,20 +367,15 @@ void bot1(mystorage& storage)
 		cout << "Введите количество элементов:\n";
 		cin >> n;
 	} while (!cin);
-	list_add(storage, n);
+	list_add(storage, n);//добавляем новые объекты
 } 
 
-void bot2(mystorage& storage, VW_group* chVW_group)
+void bot2(mystorage& storage, int i, VW_group* chVW_group)
 {
 	if (chVW_group != NULL)
 	{
 		cls;
-		int n;
-		do {
-			cout << "Введите номер объекта:\n";
-			cin >> n;
-		} while (!cin);
-		storage.delobj(n);
+		storage.delobj(i+1);//удаляем объекты выбранный
 	}
 }
 
@@ -394,31 +389,31 @@ void bot3(mystorage& storage, int& i, VW_group*& chVW_group)
 		if (chVW_group == NULL)
 			break;
 		cout << "Объект: ";
-		chVW_group->outname();
+		chVW_group->outname();//название нашего объекта 
 		cout << "\n1.Develope car\n2.Изменить мощность\n3.Удалить\n\n0.Назад";
-		ch = _getch();
+		ch = _getch();//ввод с клавиатуры
 		switch (ch)
 		{
 		case '1': {
 			cout << endl << endl;
-			storage.getobj(chVW_group)->develope_car();
+			storage.getobj(chVW_group)->develope_car();//вывод метода 
 			Sleep(600);
 			break;
 		}
-		case '2': {
+		case '2': {//ввод новой мощности 
 			int n;
 			cout << "\nВведите мощность: ";
 			cin >> n;
-			storage.getobj(chVW_group)->set_power(n);
-			cout << "\nid = " << storage.getobj(chVW_group)->get_power();
+			storage.getobj(chVW_group)->set_power(n);//меняем мощность
+			cout << "\nid = " << storage.getobj(chVW_group)->get_power();//выводим новую мощность
 			break;
 		}
 		case '3': {
-			storage.delobj(chVW_group);
+			storage.delobj(chVW_group);//удаляем объект 
 			i--;
 			break;
 		}
-		case '0': {
+		case '0': {//выход
 			ch = 0;
 			break;
 		}
@@ -427,6 +422,56 @@ void bot3(mystorage& storage, int& i, VW_group*& chVW_group)
 			break;
 	}
 
+}
+
+void bot4(mystorage& storage, VW_group*& chVW_group)
+{
+	char ch = NULL;
+
+	while (1)
+	{
+		if (ch == '0')
+			break;
+		cls;
+		cout << "1.Add Porsche\n2.Add Skoda\n3.Add Hyundai\n4.Add Genesis\n\n0.Назад";
+		ch = _getch();//ввод с клавиатуры
+		int n = 0;
+		switch (ch)
+		{
+		case '1': {//добавляем порше 
+			cls;
+			cout << "Введите n: ";
+			cin >> n;
+			storage.adddown(new Porsche(n), chVW_group);//добавляем снизу
+			break;
+		}
+		case '2': {//добавляем порше 
+			cls;
+			cout << "Введите n: ";
+			cin >> n;
+			storage.adddown(new Skoda(n), chVW_group);//добавляем снизу
+			break;
+		}
+		case '3': {//добавляем порше 
+			cls;
+			cout << "Введите n: ";
+			cin >> n;
+			storage.adddown(new Hyundai(n), chVW_group);//добавляем снизу
+			break;
+		}
+		case '4': {//добавляем порше 
+			cls;
+			cout << "Введите n: ";
+			cin >> n;
+			storage.adddown(new Genesis(n), chVW_group);//добавляем снизу
+			break;
+		}
+		case '0': {//выход
+			ch = '0';
+			break;
+		}
+		}
+	}
 }
 
 void menu_out()
@@ -464,7 +509,7 @@ int main()
 			break;
 		}
 		case '2': {
-			bot2(storage, chVW_group);
+			bot2(storage,i, chVW_group);
 			break;
 		}
 		case '3': {
@@ -473,7 +518,8 @@ int main()
 			break;
 		}
 		case '4': {
-			
+			if (chVW_group != NULL)
+				bot4(storage, chVW_group);
 			break;
 		}
 		case '5': {
