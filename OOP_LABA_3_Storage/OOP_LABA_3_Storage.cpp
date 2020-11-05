@@ -178,33 +178,33 @@ public:
 		return NULL;//иначе выводим NULL
 	}
 
-	void move(VW_group*& obj, string vector) {
-		if (vector == "up")
+	void move(VW_group*& obj, string vector) {//взависимости от кнопки или мы двигаем
+		if (vector == "up")//двигаем наверх
 		{
 			if (obj != head)
 			{
-				VW_group* dyn1 = head;
+				VW_group* dyn1 = head;//объекты для передачи свойств
 				VW_group* dyn2 = NULL;
 
-				First();
-				while (EOL())
+				First();//с начала списка
+				while (EOL())//пока не конец
 				{
-					if (next == obj)
+					if (next == obj)//если совпадает, break
 						break;
 					dyn1 = next;
 					this->Next();
 				}
-				First();
-				while (EOL())
+				First();//с начала списка
+				while (EOL())//пока не конец
 				{
-					if (next == dyn1)
+					if (next == dyn1)//если совпадает, break
 						break;
 					dyn2 = next;
 					this->Next();
 				}
 				if (dyn2 != NULL)
 					dyn2->setnext(obj);
-				if (dyn1 == head)
+				if (dyn1 == head)//передаем свойства 
 					head = obj;
 				if (obj == end)
 					end = dyn1;
@@ -213,7 +213,7 @@ public:
 			}
 		}
 		else
-			if (vector == "down")
+			if (vector == "down")//двигаем вниз
 			{
 				if (obj->getnext() != NULL)
 				{
@@ -238,7 +238,6 @@ public:
 						head = obj->getnext();
 					obj->setnext(dyn1->getnext());
 					dyn1->setnext(obj);
-
 
 				}
 			}
@@ -527,15 +526,21 @@ int main()
 			break;
 		}
 		case '6': {
-			
+			if (chVW_group != NULL)
+				storage.move(chVW_group, "up");
 			break;
 		}
 		case '7': {
-			
+			if (chVW_group != NULL)
+				storage.move(chVW_group, "down");
 			break;
 		}
 		case '8': {
-			
+			if (chVW_group != NULL)
+			{
+				storage.delobj(chVW_group);
+				i--;
+			}
 			break;
 		}
 		case 72: {
